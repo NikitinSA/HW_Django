@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+...
+SECRET_KEY = os.getenv('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,10 +21,37 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s9ua-a)kt!y@t$kk@3rqoe66$h)eu6d)jmxf2h4j3#_sc751%8'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+ALLOWED_HOSTS = [
+'127.0.0.1',
+...
+'Savka9765.pythonanywhere.com',
+]
+
+STATIC_ROOT = BASE_DIR / 'static/'
+
+DATABASES = {
+'default': {
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'Savka9765$default',
+'USER': 'Savka9765',
+'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+'HOST': 'Savka9765.mysql.pythonanywhere-services.com',
+'OPTIONS': {
+'init_command': "SET NAMES 'utf8mb4';SET
+sql_mode='STRICT_TRANS_TABLES'",
+'charset': 'utf8mb4',
+},
+}
+}
+
 
 ALLOWED_HOSTS = []
 
